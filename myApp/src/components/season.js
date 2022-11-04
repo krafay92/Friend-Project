@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Card, Grid, Typography } from '@mui/material';
 
 export default function Season() {
 
@@ -11,9 +11,8 @@ export default function Season() {
 
     const style = {
         // bgcolor: 'background.paper',
-        border: '2px solid #000',
+        // border: '2px solid #000',
         p: 4,
-        cursor: 'pointer'
     };
 
     useEffect(() => {
@@ -36,11 +35,11 @@ export default function Season() {
                     data.map((season) => {
                         return (
                             <Grid onClick={() => navigate(`/home/${seriesId}/${season._id}`)} item lg={3} key={season._id} >
-                                <Box sx={style}>
+                                <Card sx={style}>
                                     <Typography id="modal-modal-title" variant="h6" component="h2">
                                         {season.name}
                                     </Typography>
-                                </Box>
+                                </Card>
                             </Grid>
                         );
                     })
