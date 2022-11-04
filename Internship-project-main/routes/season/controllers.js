@@ -48,7 +48,18 @@ const controller = {
       return httpResponse.INTERNAL_SERVER_ERROR(res, error);
     }
   },
-  
+  getBySeries: async (req, res) => {
+    try {
+        const response = await GenreService.getBySeries(req.params.id);
+        if(response.message === "success") {
+            return httpResponse.SUCCESS(res, response.data);
+        }
+
+        return httpResponse.NOT_FOUND(res);
+    } catch (error) {
+        return httpResponse.INTERNAL_SERVER(res, error)    
+    }
+},
 
 }
 

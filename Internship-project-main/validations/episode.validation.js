@@ -6,6 +6,7 @@ const schema = {
             name: Joi.string().required(),
             description: Joi.string().required(),
             season_id: Joi.string().required(),
+            image: Joi.string()
         }),
     },
 

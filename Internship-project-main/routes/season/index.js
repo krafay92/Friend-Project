@@ -11,6 +11,6 @@ router.get("/:id",  controllers.get);
 router.post("/", validate(authValidation.add), controllers.add);
 router.delete("/:id",   controllers.delete);
 router.patch("/",   controllers.update);
-
+router.get("/series/:id", controllers.getBySeries);
 
 export default router;

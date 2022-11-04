@@ -1,10 +1,10 @@
-import UserModel from "../models/season.js";
+import Season from "../models/season.js";
 
 
 const UserService = {
   getAll: async () => {
     try {
-      const data = await UserModel.find();
+      const data = await Season.find();
 
       return { message: "success", data };
     } catch (error) {
@@ -15,7 +15,7 @@ const UserService = {
   get: async (id) => {
     try {
       if (id) {
-        const Userdata = await UserModel.findById({ _id: id });
+        const Userdata = await Season.findById({ _id: id });
         return { message: "success", data: Userdata };
       }
     } catch (error) {
@@ -25,7 +25,7 @@ const UserService = {
 
   add: async (body) => {
     try {
-      const savedData = await UserModel.create(body);
+      const savedData = await Season.create(body);
       if (savedData) {
         return { message: "success", data: savedData };
       }
@@ -37,7 +37,7 @@ const UserService = {
   delete: async (id) => {
     try {
 
-      const data = await UserModel.findOneAndDelete({ _id: id });
+      const data = await Season.findOneAndDelete({ _id: id });
       if (data) {
         return { message: "success", data: data };
       }
@@ -49,7 +49,7 @@ const UserService = {
     try {
       const userId = id;
       const time=body;
-      let updateDate = await UserModel.findByIdAndUpdate(userId, { $set: time})
+      let updateDate = await Season.findByIdAndUpdate(userId, { $set: time})
       if (updateDate) {
         return { message: "success", data: "updated" };
       }
@@ -57,6 +57,18 @@ const UserService = {
       throw error;
     }
   },
+  getBySeries: async (id) => {
+    try {
+        const season = await Season.find({series_id: id});
+        if(season) {
+            return { message: "success", data: season}
+        }
+
+        return {message: "failed"}
+    } catch (error) {
+        return { message: "error", data: error.message }
+    }
+},
 
 };
 

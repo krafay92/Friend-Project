@@ -45,11 +45,11 @@ const SeriesService = {
       return { message: "error", data: error.message };
     }
   },
-  update: async (id,body) => {
+  update: async (id, body) => {
     try {
       const userId = id;
-      const time=body;
-      let updateDate = await SeriesModel.findByIdAndUpdate(userId, { $set: time})
+      const time = body;
+      let updateDate = await SeriesModel.findByIdAndUpdate(userId, { $set: time })
       if (updateDate) {
         return { message: "success", data: "updated" };
       }

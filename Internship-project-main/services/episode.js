@@ -45,11 +45,11 @@ const UserService = {
       return { message: "error", data: error.message };
     }
   },
-  update: async (id,body) => {
+  update: async (id, body) => {
     try {
       const userId = id;
-      const time=body;
-      let updateDate = await UserModel.findByIdAndUpdate(userId, { $set: time})
+      const time = body;
+      let updateDate = await UserModel.findByIdAndUpdate(userId, { $set: time })
       if (updateDate) {
         return { message: "success", data: "updated" };
       }
@@ -57,7 +57,18 @@ const UserService = {
       throw error;
     }
   },
+  getBySeason: async (id) => {
+    try {
+      const episode = await UserModel.find({ season_id: id });
+      if (episode) {
+        return { message: "success", data: episode }
+      }
 
+      return { message: "failed" }
+    } catch (error) {
+      return { message: "error", data: error.message }
+    }
+  },
 };
 
 export default UserService;

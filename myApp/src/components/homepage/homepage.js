@@ -1,45 +1,30 @@
 import React, { useState, useEffect } from "react";
-import axios  from "axios";
+import axios from "axios";
 import "./homepage.css";
 import { Card, CardActionArea, CardContent, CardActions, Typography, Button, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
 
-    const[data, setData]=useState([]);
-    
-    useEffect( () => {
+    const navigate = useNavigate();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
         axios.get("http://localhost:2022/series/")
-        .then(res=>{
-            // console.log(res);
-            setData(res.data.data);
-        })
-        console.log(data);
+            .then(res => {
+                setData(res.data.data);
+            })
     }, [])
 
-    console.log(data);
-   
     return (
         <>
-        <div className="homepage">
-            <h1> Hello Homepage</h1>
-            {/* <div className="button" onClick={getall}>Get All</div> */}
-
-            {/* <ul>
-                {
-                    this.state.User
-                    .map(User=>
-                       <li key={User.id}>{User.name}</li> 
-                        
-                        )
-                }
-            </ul> */}
-            <Grid container spacing={2} sx={{ padding: '10px' }} >
-                {
-
-                    data.length !== 0 ?
+            <div className="homepage">
+                <Button onClick={ () => navigate('/')}>Logout</Button>
+                <Grid container spacing={2} sx={{ padding: '10px' }} >
+                    {
                         data.map((series) => {
                             return (
-                                <Grid item lg={3} key={series._id} >
+                                <Grid onClick={ () => navigate(`/home/${series._id}`)} item lg={3} key={series._id} >
                                     <Card sx={{ maxWidth: 345 }} >
                                         <CardActionArea>
                                             <CardContent>
@@ -60,14 +45,12 @@ const Homepage = () => {
                                 </Grid>
                             );
                         })
-                        :
-                        null
-                }
+                    }
 
-            </Grid>
-        </div>
-        
-        </>   
+                </Grid>
+            </div>
+
+        </>
     )
 
 }
